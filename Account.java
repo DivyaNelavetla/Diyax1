@@ -1,23 +1,37 @@
-package bank.entity;
-
+package entity;
 public class Account {
-
-	private int id;
+	private String mobileno;
 	private String name;
 	private double balance;
-
-	public Account(int id, String name, double balance) {
-		this.id = id;
+	private String accType;
+	
+	
+	public Account() {
+		this("","",0,"");
+	}
+	
+	public Account(String mobileno, String name, double balance, String accType) {
+		this.mobileno = mobileno;
 		this.name = name;
 		this.balance = balance;
+		this.accType=accType;
+	}
+	
+
+	public String getAccType() {
+		return accType;
 	}
 
-	public int getId() {
-		return id;
+	public void setAccType(String accType) {
+		this.accType = accType;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public String getMobileno() {
+		return mobileno;
+	}
+
+	public void setMobileno(String mobileno) {
+		this.mobileno = mobileno;
 	}
 
 	public String getName() {
@@ -35,14 +49,28 @@ public class Account {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
+	
+	
+	@Override
+    public String toString() {
+        String display=mobileno+" "+name +" "+balance;
+        return display;
+    }
 
-	public void addBalance(double amt) {
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==(this)){
+            return true;
+        }
+        if(obj ==null|| !(obj instanceof Account)){
+            return false;
+        }
+        Account e=(Account)obj;
+        return e.mobileno.equals(this.mobileno);
+    }
 
-		this.balance = balance + amt;
-	}
-
-	public void transferamt(Account a1, double amt) {
-		this.balance = balance - amt;
-		a1.balance = a1.balance + amt;
-	}
+    @Override
+    public int hashCode() {
+        return mobileno.hashCode();
+    }
 }
